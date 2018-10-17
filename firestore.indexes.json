@@ -1,0 +1,8 @@
+{
+	"indexes": [
+		{
+			"collectionId": "properties",
+			"fields": [{ "fieldPath": "userId", "mode": "ASCENDING" }, { "fieldPath": "addedDate", "mode": "ASCENDING" }]
+		}
+	]
+}
