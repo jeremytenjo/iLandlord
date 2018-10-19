@@ -6,12 +6,13 @@ import { TweenMax } from 'gsap'
 import firebase from 'firebase'
 import { withRouter } from 'react-router'
 
-//Components
-
 //Images
 import IconHistory from '../../../../../images/icons/history.svg'
 import IconDollar from '../../../../../images/icons/dollar.svg'
 import IconEdit from '../../../../../images/icons/edit.svg'
+import IconAddFile from '../../../../../images/icons/addFile.svg'
+
+//Components
 
 //Store
 import { bindActionCreators } from 'redux'
@@ -52,7 +53,8 @@ class ItemIncome extends React.Component {
       type: props.type,
       unit: props.unit || '',
       amount: props.amount || '',
-      focus: false
+      focus: false,
+      FileinputID: 'itemIncomeFileUpload'
     }
   }
 
@@ -61,9 +63,23 @@ class ItemIncome extends React.Component {
     document.onkeydown = null
   }
 
-  submitPayment = (e) => {
+  submitPayment = async (e) => {
     if (this.state.newAmount !== '') {
       this.props.showLoadingScreen('Adding income payment...')
+
+      // Check If file exists
+      let fileEl = document.querySelector('#' + this.state.FileinputID)
+      let file = fileEl.files[0] || false
+      let fileID = false
+      let fileUrl = false
+
+      if (file) {
+        let storageRef = firebase.storage().ref()
+        fileID = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+        let fileRef = storageRef.child('files/incomes/' + fileID)
+        let snapshot = await fileRef.put(file)
+        fileUrl = await snapshot.ref.getDownloadURL()
+      }
 
       let data = {},
         d = new Date(this.state.date),
@@ -93,6 +109,8 @@ class ItemIncome extends React.Component {
       data.month = months[month]
       data.year = year
       data.date = data.month + ' ' + day
+      data.fileUrl = fileUrl
+      data.fileID = fileID
 
       //save online
       return firebase
@@ -218,6 +236,12 @@ class ItemIncome extends React.Component {
             onChange={this.handleDateInput}
             underlineStyle={DatePickerStyle.underlineStyle}
           />
+          <Upload className="image-upload">
+            <label htmlFor={this.state.FileinputID}>
+              <img src={IconAddFile} alt="add file" />
+            </label>
+            <input id={this.state.FileinputID} type="file" />
+          </Upload>
           <Pay newAmount={this.state.newAmount} onClick={this.submitPayment}>
             Submit
           </Pay>
@@ -295,7 +319,7 @@ const LastPayment = styled.p`
 `
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 10px 1fr 90px 60px;
+  grid-template-columns: 10px 1fr 90px 30px 60px;
   grid-column-gap: 10px;
   box-sizing: border-box;
   height: 23px;
@@ -356,6 +380,10 @@ const Pay = styled.p`
     props.newAmount === '' ? 'none' : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
   border-radius: 2px;
   line-height: 23px;
+`
+const Upload = styled.div`
+  transform: translateX(4px);
+  justify-self: center;
 `
 
 export default withRouter(

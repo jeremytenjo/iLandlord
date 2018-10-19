@@ -60,69 +60,70 @@ class ItemBill extends React.Component {
     document.onkeydown = null
   }
 
-  submitPayment = (e) => {
+  submitPayment = async (e) => {
     if (this.state.newAmount !== '') {
-      // this.props.showSnackbar('Adding Payment...')
-      // this.props.showLoadingScreen('Adding bill payment...')
+      this.props.showLoadingScreen('Adding bill payment...')
 
       let fileEl = document.querySelector('#' + this.state.FileinputID)
-      let file = fileEl.files[0]
+      let file = fileEl.files[0] || false
+      let fileID = false
+      let fileUrl = false
 
+      // Check If file exists
       if (file) {
         let storageRef = firebase.storage().ref()
-        let fileID = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+        fileID = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
         let fileRef = storageRef.child('files/bills/' + fileID)
-
-        fileRef.put(file).then((snapshot) => {
-          let fileUrl = snapshot.downloadURL
-          console.log(fileUrl)
-        })
+        let snapshot = await fileRef.put(file)
+        fileUrl = await snapshot.ref.getDownloadURL()
       }
 
-      // let data = {},
-      //   d = new Date(this.state.valueDate),
-      //   month = d.getMonth(),
-      //   months = [
-      //     'January',
-      //     'February',
-      //     'March',
-      //     'April',
-      //     'May',
-      //     'June',
-      //     'July',
-      //     'August',
-      //     'September',
-      //     'October',
-      //     'November',
-      //     'December'
-      //   ],
-      //   year = d.getFullYear(),
-      //   day = d.getDate()
+      let data = {},
+        d = new Date(this.state.valueDate),
+        month = d.getMonth(),
+        months = [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
+        ],
+        year = d.getFullYear(),
+        day = d.getDate()
 
-      // data.rand = Math.random()
-      // data.propertyId = this.props.Property.id
-      // data.billId = this.state.billId
-      // data.amount = this.state.newAmount
-      // data.timestamp = this.state.valueDate
-      // data.month = months[month]
-      // data.year = year
-      // data.date = data.month + ' ' + day
+      data.rand = Math.random()
+      data.propertyId = this.props.Property.id
+      data.billId = this.state.billId
+      data.amount = this.state.newAmount
+      data.timestamp = this.state.valueDate
+      data.month = months[month]
+      data.year = year
+      data.date = data.month + ' ' + day
+      data.fileUrl = fileUrl
+      data.fileID = fileID
 
-      // //save online
-      // return firebase
-      //   .firestore()
-      //   .collection('billPayments')
-      //   .add(data)
-      //   .then((value) => {
-      //     data.billPaymentId = value.id
-      //     // console.log(data);
-      //     //save store
-      //     this.props.insertBillPayment(data)
+      //save online
+      return firebase
+        .firestore()
+        .collection('billPayments')
+        .add(data)
+        .then((value) => {
+          data.billPaymentId = value.id
+          // console.log(data);
+          //save store
+          this.props.insertBillPayment(data)
 
-      //     this.props.hideLoadingScreen()
-      //     this.props.showSnackbar('Payment Added')
-      //     this.setState({ newAmount: '', focus: false })
-      //   })
+          this.props.hideLoadingScreen()
+          this.props.showSnackbar('Payment Added')
+          this.setState({ newAmount: '', focus: false })
+        })
     } else {
       this.props.showSnackbar('Please input amount first')
       let amountInput = e.target.parentNode.childNodes[1]

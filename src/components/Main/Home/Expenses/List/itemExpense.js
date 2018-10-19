@@ -168,7 +168,6 @@ class ItemExpense extends React.Component {
   }
   submitPayment = (e) => {
     if (this.state.newAmount !== '') {
-      // this.props.showSnackbar('Adding Payment...')
       this.props.showLoadingScreen('Adding expense payment...')
 
       let data = {},
