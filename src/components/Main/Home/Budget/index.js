@@ -248,11 +248,16 @@ const TimepickerCon = styled.div`
 `
 const ListCon = styled.div`
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   @media (min-width: 600px) {
     display: grid;
     grid-template-columns: repeat(auto-fill, 290px);
     grid-template-rows: repeat(auto-fill, 82px);
   }
 `
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Budget))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Budget)
+)

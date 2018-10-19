@@ -193,7 +193,7 @@ class Report extends React.Component {
       return 0
     })
     let Rows = dataset2.map((item, i) => {
-      let perc = item.y * 100 / total
+      let perc = (item.y * 100) / total
       return (
         <Row key={Math.random()}>
           <div
@@ -246,7 +246,7 @@ const Wrapper = styled.div`
   height: 100%;
   grid-template-columns: 100%;
   grid-template-rows: 40px 250px auto 50px;
-  overflow: hidden;
+  overflow: auto;
   color: white;
 
   @media (min-width: 900px) {
@@ -287,7 +287,7 @@ const Dataset = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  overflow: scroll;
+  overflow: auto;
   grid-gap: 15px;
   overflow-x: hidden;
   grid-template-rows: repeat(auto-fill, 20px);
@@ -311,6 +311,9 @@ const Row = styled.div`
 `
 const Footer = styled.div`
   text-align: center;
+  h3 {
+    margin: 0;
+  }
 `
 
 const LoadingCon = styled.div`
@@ -324,4 +327,9 @@ const LoadingCon = styled.div`
   height: 80px;
 `
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Report))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Report)
+)

@@ -154,8 +154,13 @@ const Wrapper = styled.div`
   height: 100%;
 `
 const Content = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 `
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Bills))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Bills)
+)

@@ -380,7 +380,7 @@ const PlusIMG = styled.img`
   top: 20px;
 `
 const Content = styled.div`
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 `
@@ -439,10 +439,15 @@ const ArrowDOwn = styled.img`
 `
 
 const Bottom = styled.div`
-  overflow: scroll;
+  overflow: auto;
   margintop: 30px;
   height: 100%;
   overflow-x: hidden;
 `
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SideBar))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SideBar)
+)
