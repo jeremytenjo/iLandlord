@@ -14,6 +14,7 @@ import CommentView from './_commentView'
 import LoadingScreen from './_loadingScreen'
 import BottomNav from './_BottomNav/'
 import DialogAlert from './_DialogAlert'
+import Offline from './../../services/Offline/offline'
 
 //Dynamic Components
 const Home = Loadable({
@@ -23,25 +24,27 @@ const Home = Loadable({
 
 class Main extends React.Component {
   //Methods
-  componentWillMount() {
-    //if user is offline show snackbar
-    window.onoffline = () => {
-      let snackbar = document.querySelector('#snackbar')
-      snackbar.childNodes[0].innerHTML = 'You are Offline'
-      TweenMax.to(snackbar, 0.2, {
-        // delay: .5,
-        bottom: '70px'
-      })
-      TweenMax.to(snackbar, 0.2, { delay: 2, bottom: '-50px' })
-    }
-  }
   componentDidMount() {
+    //handle offline
+    !navigator.onLine && this.showSnackbar()
+    window.onoffline = () => this.showSnackbar()
+
     //show add to homescren dialog
     window.addEventListener('beforeinstallprompt', function(e) {
       e.userChoice.then(function(choiceResult) {
         // console.log(choiceResult.outcome)
       })
     })
+  }
+
+  showSnackbar = () => {
+    let snackbar = document.querySelector('#snackbar')
+    snackbar.childNodes[0].innerHTML = 'You are Offline'
+    TweenMax.to(snackbar, 0.2, {
+      // delay: .5,
+      bottom: '70px'
+    })
+    TweenMax.to(snackbar, 0.2, { delay: 2, bottom: '-50px' })
   }
   render() {
     //Properties
