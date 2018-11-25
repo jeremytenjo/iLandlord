@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { Route, BrowserRouter, Redirect, Switch } from 'react-router-dom'
 import firebase from 'firebase'
-import CircularProgress from 'material-ui/CircularProgress'
 import Loadable from 'react-loadable'
 
 //Services
@@ -74,9 +73,7 @@ class App extends React.Component {
 
     //Template
     return this.state.loading === true ? (
-      <LoadingCon>
-        <CircularProgress size={80} thickness={5} color="#00C853" />
-      </LoadingCon>
+      <React.Fragment />
     ) : (
       <BrowserRouter>
         <Switch>
