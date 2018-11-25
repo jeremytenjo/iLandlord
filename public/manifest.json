@@ -2,7 +2,7 @@
   "short_name": "iLandlord",
   "name": "iLandlord",
   "display": "standalone",
-  "theme_color": "#ffffff",
+  "theme_color": "#00c853",
   "background_color": "#1e3c72",
   "orientation": "portrait",
   "Scope": "/",
