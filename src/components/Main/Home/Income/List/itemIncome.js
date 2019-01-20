@@ -199,6 +199,7 @@ class ItemIncome extends React.Component {
     } else {
       latestPayment = [{ amount: 0, date: 'none' }]
     }
+
     //Template
     return (
       <Wrapper newAmount={this.state.newAmount}>
