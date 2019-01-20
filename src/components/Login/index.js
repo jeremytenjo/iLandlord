@@ -6,7 +6,6 @@ import firebase from 'firebase'
 
 //Images
 import LoginBGDesktop from '../../images/backgrounds/login-desktop.png'
-import LoginBGMobile from '../../images/backgrounds/login-mobile.png'
 import Logo from '../../images/icons/logo.svg'
 
 class Login extends React.Component {
