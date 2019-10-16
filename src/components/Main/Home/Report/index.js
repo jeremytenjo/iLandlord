@@ -13,9 +13,7 @@ import TimePicker from '../../../_global/TimePicker2'
 //functions
 import fetchFirestoreGetAll from '../../../../services/Firebase/functions/getAll.js' //type, propertyId, idname
 
-//Images
-
-//Functions
+import { transitionType } from '../../../../services/Transitions/transitions.consts'
 
 //Store
 import { bindActionCreators } from 'redux'
@@ -174,7 +172,7 @@ class Report extends React.Component {
 
     //Template
     return (
-      <Wrapper className="react-transition fade-in">
+      <Wrapper className={transitionType}>
         <TimepickerCon>
           <TimePicker source="report" />
         </TimepickerCon>

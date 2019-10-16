@@ -4,20 +4,7 @@ import styled from 'styled-components'
 import Loadable from 'react-loadable'
 import { Route, Switch } from 'react-router-dom'
 
-//Components
-
-//Images
-
-//Functions
-
-//Store
-//import {bindActionCreators} from 'redux'
-//import {connect} from 'react-redux'
-//import {triggerAction} from './_state/actions'
-
-//Actions
-
-//Reducers
+import { transitionType } from '../../../services/Transitions/transitions.consts'
 
 //Dynamic Components
 const Bills = Loadable({
@@ -46,7 +33,7 @@ const Report = Loadable({
 class HomeIndex extends React.Component {
   render() {
     return (
-      <Wrapper className="react-transition fade-in">
+      <Wrapper className={transitionType}>
         <Switch>
           <Route exact={true} path="/" component={Bills} />
           <Route exact={true} path="/:id/" component={Bills} />

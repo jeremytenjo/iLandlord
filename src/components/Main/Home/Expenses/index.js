@@ -8,7 +8,8 @@ import { Route, Switch } from 'react-router-dom'
 
 //Components
 import NavBar from './_NavBar'
-//Images
+
+import { transitionType } from '../../../../services/Transitions/transitions.consts'
 
 //functions
 import fetchFirestoreGetAll from '../../../../services/Firebase/functions/getAll.js' //type, propertyId, idname
@@ -138,7 +139,7 @@ class Expenses extends React.Component {
     return (
       <Wrapper>
         <NavBar />
-        <Content className="react-transition fade-in">
+        <Content className={transitionType}>
           <Switch>
             <Route exact={true} path="/" component={List} />
             <Route exact={true} path="/:id/" component={List} />

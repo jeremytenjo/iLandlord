@@ -9,7 +9,7 @@ import Timepicker from '../../../_global/TimePickerNew'
 import Banner from './Banner'
 import ExpenseItem from './ExpenseItem'
 
-//Images
+import { transitionType } from '../../../../services/Transitions/transitions.consts'
 
 //Functions
 import fetchFirestoreGetAll from '../../../../services/Firebase/functions/getAll.js' //type, propertyId, idname
@@ -247,7 +247,7 @@ class Budget extends React.Component {
     // console.log(this.state.limitTotal)
     //Template
     return (
-      <Wrapper className="react-transition fade-in">
+      <Wrapper className={transitionType}>
         <TimepickerCon>
           <Timepicker
             setDate={(date) =>
