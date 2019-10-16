@@ -563,7 +563,7 @@ const Container = styled.div`
 const AmountInput = styled.input`
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 10px;
+  border-radius: 2px;
   line-height: 23px;
   padding: 0;
   font-size: 16px;
@@ -609,8 +609,8 @@ const Pay = styled.p`
     props.newAmount === ''
       ? 'none'
       : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
-  border-radius: 10px;
-  line-height: 23px;
+  border-radius: 2px;
+  line-height: 23px; 
 `
 
 const Upload = styled.div`
