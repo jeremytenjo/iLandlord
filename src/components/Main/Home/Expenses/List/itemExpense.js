@@ -22,7 +22,10 @@ import { connect } from 'react-redux'
 import { insertExpensePayment } from '../_state/ExpensePayments/actions'
 import { setDialogHistory } from '../../../../../services/Redux/Dialogues/actions'
 import { showSnackbar } from '../../../../../services/Redux/Snackbar/actions'
-import { showLoadingScreen, hideLoadingScreen } from '../../../../../services/Redux/LoadingScreen/actions'
+import {
+  showLoadingScreen,
+  hideLoadingScreen
+} from '../../../../../services/Redux/LoadingScreen/actions'
 import { setComment } from '../../../../../services/Redux/Comment/actions'
 
 //define actions
@@ -41,7 +44,11 @@ function mapDispatchToProps(dispatch) {
 }
 //Set global state to prop
 function mapStateToProps(state) {
-  return { ExpensePayments: state.ExpensePayments, Property: state.Property, Comment: state.Comment }
+  return {
+    ExpensePayments: state.ExpensePayments,
+    Property: state.Property,
+    Comment: state.Comment
+  }
 }
 class ItemExpense extends React.Component {
   //initial state
@@ -71,7 +78,9 @@ class ItemExpense extends React.Component {
     }
 
     //update if expense removed
-    if (this.props.ExpensePayments.length !== nextProps.ExpensePayments.length) {
+    if (
+      this.props.ExpensePayments.length !== nextProps.ExpensePayments.length
+    ) {
       this.getData()
     }
   }
@@ -108,7 +117,9 @@ class ItemExpense extends React.Component {
       barColor = '#00c853'
 
     // get expense payments
-    payments = this.props.ExpensePayments.filter((payment) => this.state.expenseId === payment.expenseId)
+    payments = this.props.ExpensePayments.filter(
+      (payment) => this.state.expenseId === payment.expenseId
+    )
     // console.log(payments)
 
     //filter payments from current month
@@ -121,7 +132,12 @@ class ItemExpense extends React.Component {
 
     //add pay limit
     data.limit = this.state.limit
-    if (this.state.limit === '' || isNaN(data.limit) || data.limit === '' || typeof data.limit === 'undefined') {
+    if (
+      this.state.limit === '' ||
+      isNaN(data.limit) ||
+      data.limit === '' ||
+      typeof data.limit === 'undefined'
+    ) {
       data.limit = 0
     }
     data.limit = parseInt(data.limit, 10)
@@ -195,7 +211,9 @@ class ItemExpense extends React.Component {
       //upload  with file
       if (fileId.files.length !== 0) {
         let storageRef = firebase.storage().ref(),
-          fileID = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1),
+          fileID = (((1 + Math.random()) * 0x10000) | 0)
+            .toString(16)
+            .substring(1),
           fileRef = storageRef.child('files/expenses/' + fileID),
           file = fileId.files[0]
 
@@ -345,7 +363,9 @@ class ItemExpense extends React.Component {
     //gett all payments from this expense
     let latestPayment = []
 
-    let expensePayments = this.props.ExpensePayments.filter((obj) => obj.expenseId === this.state.expenseId)
+    let expensePayments = this.props.ExpensePayments.filter(
+      (obj) => obj.expenseId === this.state.expenseId
+    )
 
     if (expensePayments.length !== 0) {
       //sort payments by date
@@ -366,7 +386,11 @@ class ItemExpense extends React.Component {
       <Wrapper newAmount={this.state.newAmount}>
         <Row1>
           <Category>{this.state.category}</Category>
-          <HistoryIcon src={IconHistory} alt="history icon" onClick={this.showHistory} />
+          <HistoryIcon
+            src={IconHistory}
+            alt="history icon"
+            onClick={this.showHistory}
+          />
           <HistoryIcon src={IconEdit} alt="edit icon" onClick={this.openEdit} />
         </Row1>
         <Provider>{this.state.provider}</Provider>
@@ -389,7 +413,10 @@ class ItemExpense extends React.Component {
         <LastPayment>
           Last Payment: $
           <span
-            style={{ borderBottom: '1px solid var(--colorBg)', cursor: 'pointer' }}
+            style={{
+              borderBottom: '1px solid var(--colorBg)',
+              cursor: 'pointer'
+            }}
             onClick={() => this.setAmount(latestPayment[0].amount)}
           >
             {latestPayment[0].amount}
@@ -397,7 +424,12 @@ class ItemExpense extends React.Component {
           &nbsp;on {latestPayment[0].date}
         </LastPayment>
 
-        <Payee type="text" placeholder="Payee" value={this.state.inputPayee} onChange={this.handlePayee} />
+        <Payee
+          type="text"
+          placeholder="Payee"
+          value={this.state.inputPayee}
+          onChange={this.handlePayee}
+        />
 
         <Container>
           <img src={IconDollar} alt="dolar icon" />
@@ -445,7 +477,7 @@ const toGreen = keyframes`
 //Style
 const Wrapper = styled.div`
   background-color: white;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 10px;
   box-sizing: border-box;
@@ -490,7 +522,10 @@ const LastPayment = styled.p`
   line-height: 17px;
 `
 const BudgetCon = styled.div`
-  display: ${(props) => (props.limit === '' || props.limit === 0 ? 'none' || props.limit === false : 'grid')};
+  display: ${(props) =>
+    props.limit === '' || props.limit === 0
+      ? 'none' || props.limit === false
+      : 'grid'};
   grid-template-columns: 190px 1fr;
   grid-gap: 5px;
 `
@@ -528,7 +563,7 @@ const Container = styled.div`
 const AmountInput = styled.input`
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
+  border-radius: 10px;
   line-height: 23px;
   padding: 0;
   font-size: 16px;
@@ -565,13 +600,16 @@ const DatePickerStyle = {
 }
 const Pay = styled.p`
   text-align: center;
-  color: ${(props) => (props.newAmount === '' ? 'var(--colorDisabled)' : 'var(--colorMain)')};
+  color: ${(props) =>
+    props.newAmount === '' ? 'var(--colorDisabled)' : 'var(--colorMain)'};
   font-weight: bold;
   margin: 0;
   cursor: ${(props) => (props.newAmount === '' ? 'not-allowed' : 'pointer')};
   box-shadow: ${(props) =>
-    props.newAmount === '' ? 'none' : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
-  border-radius: 2px;
+    props.newAmount === ''
+      ? 'none'
+      : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
+  border-radius: 10px;
   line-height: 23px;
 `
 

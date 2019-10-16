@@ -54,7 +54,9 @@ class DialogHistory extends React.Component {
       chartContainer = document.querySelector('#chartContainer')
 
     chartWrapper.style.display = 'block'
-    TweenMax.to(chartWrapper, 0.2, { background: 'rgba(0, 0, 0,  0.61) !important' })
+    TweenMax.to(chartWrapper, 0.2, {
+      background: 'rgba(0, 0, 0,  0.61) !important'
+    })
 
     chartContainer.style.opacity = 1
     TweenMax.to(chartContainer, 0.2, {
@@ -142,7 +144,12 @@ class DialogHistory extends React.Component {
       RowList = sortedFinal.map((row, index) => {
         // console.log(row);
         return (
-          <Rowhistory key={Math.random()} type={this.props.Dialogues.type} billId={this.props.Dialogues.id} {...row} />
+          <Rowhistory
+            key={Math.random()}
+            type={this.props.Dialogues.type}
+            billId={this.props.Dialogues.id}
+            {...row}
+          />
         )
       })
     }
@@ -200,7 +207,11 @@ class DialogHistory extends React.Component {
               height: '100%'
             }}
           >
-            <IconDownArrowIMG src={IconDownArrow} alt="arrow down" onClick={this.hideDialogHistory} />
+            <IconDownArrowIMG
+              src={IconDownArrow}
+              alt="arrow down"
+              onClick={this.hideDialogHistory}
+            />
 
             <Title>
               <span>
@@ -221,7 +232,11 @@ class DialogHistory extends React.Component {
                 <ChartContainer id="chartContainer">
                   <Topp>
                     <p>Usage</p>
-                    <img src={IconClose} alt="close" onClick={this.closeChart} />
+                    <img
+                      src={IconClose}
+                      alt="close"
+                      onClick={this.closeChart}
+                    />
                   </Topp>
 
                   <canvas id="HistoryLineCHart" width="400" height="400" />
@@ -336,7 +351,7 @@ const ChartContainer = styled.div`
     top: 0;
     bottom: 0;
     margin: auto;
-    border-radius: 2px;
+    border-radius: 10px;
   }
 
   @media (min-width: 800px) {

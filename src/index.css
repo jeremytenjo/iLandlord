@@ -47,7 +47,7 @@ textarea {
 
   ::-webkit-scrollbar-thumb {
     background: #bdbdbd;
-    border-radius: 2px;
+    border-radius: 10px;
   }
 
   ::-webkit-scrollbar-thumb:hover {

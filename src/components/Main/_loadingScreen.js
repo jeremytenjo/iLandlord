@@ -61,7 +61,7 @@ const Main = styled.div`
   right: 0;
   bottom: 0;
   margin: auto;
-  border-radius: 2px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: 40px 1fr;
   box-sizing: border-box;
@@ -87,4 +87,7 @@ const innerStyle = {
   height: '80px'
 }
 
-export default connect(mapStateToProps, null)(loadingScreen)
+export default connect(
+  mapStateToProps,
+  null
+)(loadingScreen)

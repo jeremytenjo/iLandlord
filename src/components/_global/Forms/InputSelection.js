@@ -153,7 +153,7 @@ const Content = styled.div`
   display: grid;
   grid-template-rows: 32px;
   transform-origin: top;
-  border-radius: 2px;
+  border-radius: 10px;
   transform: scaleY(0);
   opacity: 0;
   @media (min-width: 1200px) {

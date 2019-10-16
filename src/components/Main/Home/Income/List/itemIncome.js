@@ -20,7 +20,10 @@ import { connect } from 'react-redux'
 import { insertIncomePayment } from '../_state/IncomePayments/actions'
 import { setDialogHistory } from '../../../../../services/Redux/Dialogues/actions'
 import { showSnackbar } from '../../../../../services/Redux/Snackbar/actions'
-import { showLoadingScreen, hideLoadingScreen } from '../../../../../services/Redux/LoadingScreen/actions'
+import {
+  showLoadingScreen,
+  hideLoadingScreen
+} from '../../../../../services/Redux/LoadingScreen/actions'
 
 //define actions
 function mapDispatchToProps(dispatch) {
@@ -170,7 +173,9 @@ class ItemIncome extends React.Component {
   }
 
   setAmount = (amount) => {
-    amount ? this.setState({ newAmount: amount }) : this.setState({ newAmount: this.state.amount })
+    amount
+      ? this.setState({ newAmount: amount })
+      : this.setState({ newAmount: this.state.amount })
   }
   openEdit = () => {
     // console.log(this.state)
@@ -189,7 +194,9 @@ class ItemIncome extends React.Component {
     //Properties
     let latestPayment = []
 
-    let incomePayments = this.props.IncomePayments.filter((obj) => obj.incomeId === this.state.incomeId)
+    let incomePayments = this.props.IncomePayments.filter(
+      (obj) => obj.incomeId === this.state.incomeId
+    )
 
     if (incomePayments.length !== 0) {
       //sort payments by date
@@ -205,7 +212,11 @@ class ItemIncome extends React.Component {
       <Wrapper newAmount={this.state.newAmount}>
         <Row1>
           <Name>{this.state.name}</Name>
-          <HistoryIcon src={IconHistory} alt="history icon" onClick={this.showHistory} />
+          <HistoryIcon
+            src={IconHistory}
+            alt="history icon"
+            onClick={this.showHistory}
+          />
           <HistoryIcon src={IconEdit} alt="edit icon" onClick={this.openEdit} />
         </Row1>
         <Type type={this.state.type}>Type: {this.state.type}</Type>
@@ -213,7 +224,10 @@ class ItemIncome extends React.Component {
         <LastPayment>
           Last Payment: $
           <span
-            style={{ borderBottom: '1px solid var(--colorBg)', cursor: 'pointer' }}
+            style={{
+              borderBottom: '1px solid var(--colorBg)',
+              cursor: 'pointer'
+            }}
             onClick={() => this.setAmount(latestPayment[0].amount)}
           >
             {latestPayment[0].amount}
@@ -266,7 +280,7 @@ const toGreen = keyframes`
 //Style
 const Wrapper = styled.div`
   background-color: white;
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 10px;
   box-sizing: border-box;
@@ -348,7 +362,7 @@ const Container = styled.div`
 const AmountInput = styled.input`
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 2px;
+  border-radius: 10px;
   line-height: 23px;
   padding: 0;
   font-size: 16px;
@@ -373,13 +387,16 @@ const DatePickerStyle = {
 }
 const Pay = styled.p`
   text-align: center;
-  color: ${(props) => (props.newAmount === '' ? 'var(--colorDisabled)' : 'var(--colorMain)')};
+  color: ${(props) =>
+    props.newAmount === '' ? 'var(--colorDisabled)' : 'var(--colorMain)'};
   font-weight: bold;
   margin: 0;
   cursor: ${(props) => (props.newAmount === '' ? 'not-allowed' : 'pointer')};
   box-shadow: ${(props) =>
-    props.newAmount === '' ? 'none' : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
-  border-radius: 2px;
+    props.newAmount === ''
+      ? 'none'
+      : ' 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'};
+  border-radius: 10px;
   line-height: 23px;
 `
 const Upload = styled.div`
