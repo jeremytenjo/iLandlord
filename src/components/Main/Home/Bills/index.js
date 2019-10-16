@@ -117,7 +117,11 @@ class Bills extends React.Component {
       }
 
       bills = await fetchFirestoreGetAll('bills', urlProperty, 'billId')
-      billPayments = await fetchFirestoreGetAll('billPayments', urlProperty, 'billPaymentId')
+      billPayments = await fetchFirestoreGetAll(
+        'billPayments',
+        urlProperty,
+        'billPaymentId'
+      )
 
       this.props.setBills(bills)
       this.props.setBillPayments(billPayments)
@@ -134,7 +138,7 @@ class Bills extends React.Component {
     return (
       <Wrapper>
         <NavBar />
-        <Content>
+        <Content className="react-transition fade-in">
           <Switch>
             <Route exact={true} path="/" component={List} />
             <Route exact={true} path="/:id/" component={List} />

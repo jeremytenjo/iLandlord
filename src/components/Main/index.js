@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Loadable from 'react-loadable'
 import { Route, Switch } from 'react-router-dom'
 import { TweenMax } from 'gsap'
+import '../../services/Transitions/react-transitions.css'
 
 //Components
 import Topbar from './_topBar'
@@ -54,7 +55,7 @@ class Main extends React.Component {
         <Header>
           <Topbar />
         </Header>
-        <Content id="content">
+        <Content id="content" className="transition-container">
           <Switch>
             <Route exact={true} path="/" component={Home} />
             <Route exact={true} path="/:id/" component={Home} />
@@ -65,7 +66,11 @@ class Main extends React.Component {
             <Route exact={true} path="/:id/income/addIncome" component={Home} />
             <Route exact={true} path="/:id/income/report" component={Home} />
             <Route exact={true} path="/:id/expenses" component={Home} />
-            <Route exact={true} path="/:id/expenses/addExpense" component={Home} />
+            <Route
+              exact={true}
+              path="/:id/expenses/addExpense"
+              component={Home}
+            />
             <Route exact={true} path="/:id/expenses/report" component={Home} />
             <Route exact={true} path="/:id/budget" component={Home} />
             <Route exact={true} path="/:id/report" component={Home} />
@@ -89,7 +94,12 @@ class Main extends React.Component {
 //Style
 const Wrapper = styled.div`
   background-repeat: no-repeat;
-  background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+  background-image: linear-gradient(
+    to top,
+    #1e3c72 0%,
+    #1e3c72 1%,
+    #2a5298 100%
+  );
   background-size: 100%;
   background-position: center;
   background-attachment: fixed;

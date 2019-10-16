@@ -101,7 +101,10 @@ class Budget extends React.Component {
       currentYear = d.getFullYear(),
       currentMonth = d.getMonth() + 1
 
-    this.setState({ filterMonth: months[currentMonth], filterYear: currentYear })
+    this.setState({
+      filterMonth: months[currentMonth],
+      filterYear: currentYear
+    })
   }
   async componentDidMount() {
     //if there are expense in store
@@ -111,8 +114,16 @@ class Budget extends React.Component {
       //if there are no expense in store
       let pathname = this.props.location.pathname.split('/'),
         urlProperty = pathname[1],
-        expenses = await fetchFirestoreGetAll('expenses', urlProperty, 'expenseId'),
-        expensePayments = await fetchFirestoreGetAll('expensePayments', urlProperty, 'expensePaymentId')
+        expenses = await fetchFirestoreGetAll(
+          'expenses',
+          urlProperty,
+          'expenseId'
+        ),
+        expensePayments = await fetchFirestoreGetAll(
+          'expensePayments',
+          urlProperty,
+          'expensePaymentId'
+        )
 
       this.props.setExpenses(expenses)
       this.props.setExpensePayments(expensePayments)
@@ -122,8 +133,14 @@ class Budget extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    if (nextState.filterMonth !== this.state.filterMonth || nextState.filterYear !== this.state.filterYear) {
-      this.setState({ filterMonth: nextState.filterMonth, filterYear: nextState.filterYear })
+    if (
+      nextState.filterMonth !== this.state.filterMonth ||
+      nextState.filterYear !== this.state.filterYear
+    ) {
+      this.setState({
+        filterMonth: nextState.filterMonth,
+        filterYear: nextState.filterYear
+      })
 
       this.fetchExpenses(nextState.filterMonth, nextState.filterYear)
     }
@@ -148,7 +165,9 @@ class Budget extends React.Component {
       data.id = expense.expenseId
 
       // get expense payments
-      payments = this.props.ExpensePayments.filter((payment) => expense.expenseId === payment.expenseId)
+      payments = this.props.ExpensePayments.filter(
+        (payment) => expense.expenseId === payment.expenseId
+      )
       // console.log(payments)
 
       //filter payments from current month
@@ -161,7 +180,12 @@ class Budget extends React.Component {
 
       //add pay limit
       data.limit = expense.limit
-      if (expense.limit === '' || isNaN(data.limit) || data.limit === '' || typeof data.limit === 'undefined') {
+      if (
+        expense.limit === '' ||
+        isNaN(data.limit) ||
+        data.limit === '' ||
+        typeof data.limit === 'undefined'
+      ) {
         data.limit = 0
       }
       data.limit = parseInt(data.limit, 10)
@@ -186,36 +210,59 @@ class Budget extends React.Component {
       if (data.limit !== 0) {
         remaining = data.limit - data.total
         expenseList.push(
-          <ExpenseItem key={data.id} title={data.title} goal={data.limit} spent={data.total} remaining={remaining} />
+          <ExpenseItem
+            key={data.id}
+            title={data.title}
+            goal={data.limit}
+            spent={data.total}
+            remaining={remaining}
+          />
         )
       }
       // console.log(bannerTotal)
       // console.log(limitTotal)
       if (limitTotal !== 0) {
-        return this.setState({ expenseList, bannerTotal, limitTotal, budget: true })
+        return this.setState({
+          expenseList,
+          bannerTotal,
+          limitTotal,
+          budget: true
+        })
       } else {
-        return this.setState({ expenseList, bannerTotal: 0, limitTotal: 0, budget: false })
+        return this.setState({
+          expenseList,
+          bannerTotal: 0,
+          limitTotal: 0,
+          budget: false
+        })
       }
     })
   }
 
-  toHome = () => this.props.history.push('/' + this.props.Property.id + '/expenses')
+  toHome = () =>
+    this.props.history.push('/' + this.props.Property.id + '/expenses')
 
   render() {
     //Properties
     // console.log(this.state.limitTotal)
     //Template
     return (
-      <Wrapper>
+      <Wrapper className="react-transition fade-in">
         <TimepickerCon>
           <Timepicker
-            setDate={(date) => this.setState({ filterMonth: date.month, filterYear: date.year })}
+            setDate={(date) =>
+              this.setState({ filterMonth: date.month, filterYear: date.year })
+            }
             setMonth={(month) => this.setState({ filterMonth: month })}
             setYear={(year) => this.setState({ filterYear: year })}
           />
         </TimepickerCon>
 
-        <Banner total={this.state.bannerTotal} limitTotal={this.state.limitTotal} budget={this.state.budget} />
+        <Banner
+          total={this.state.bannerTotal}
+          limitTotal={this.state.limitTotal}
+          budget={this.state.budget}
+        />
 
         <ListCon>{this.state.expenseList}</ListCon>
       </Wrapper>

@@ -46,7 +46,7 @@ const Report = Loadable({
 class HomeIndex extends React.Component {
   render() {
     return (
-      <Wrapper>
+      <Wrapper className="react-transition fade-in">
         <Switch>
           <Route exact={true} path="/" component={Bills} />
           <Route exact={true} path="/:id/" component={Bills} />
@@ -57,8 +57,16 @@ class HomeIndex extends React.Component {
           <Route exact={true} path="/:id/income/addIncome" component={Income} />
           <Route exact={true} path="/:id/income/report" component={Income} />
           <Route exact={true} path="/:id/expenses" component={Expenses} />
-          <Route exact={true} path="/:id/expenses/addExpense" component={Expenses} />
-          <Route exact={true} path="/:id/expenses/report" component={Expenses} />
+          <Route
+            exact={true}
+            path="/:id/expenses/addExpense"
+            component={Expenses}
+          />
+          <Route
+            exact={true}
+            path="/:id/expenses/report"
+            component={Expenses}
+          />
           <Route exact={true} path="/:id/budget" component={Budget} />
           <Route exact={true} path="/:id/report" component={Report} />
         </Switch>

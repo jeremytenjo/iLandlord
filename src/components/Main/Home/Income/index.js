@@ -118,7 +118,11 @@ class Incomes extends React.Component {
       }
 
       incomes = await fetchFirestoreGetAll('incomes', urlProperty, 'incomeId')
-      incomePayments = await fetchFirestoreGetAll('incomePayments', urlProperty, 'incomePaymentId')
+      incomePayments = await fetchFirestoreGetAll(
+        'incomePayments',
+        urlProperty,
+        'incomePaymentId'
+      )
 
       this.props.setIncomes(incomes)
       this.props.setIncomePayments(incomePayments)
@@ -135,7 +139,7 @@ class Incomes extends React.Component {
     return (
       <Wrapper>
         <NavBar />
-        <Content>
+        <Content className="react-transition fade-in">
           <Switch>
             <Route exact={true} path="/" component={List} />
             <Route exact={true} path="/:id/" component={List} />

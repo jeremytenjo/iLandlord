@@ -96,27 +96,59 @@ class Report extends React.Component {
       }
 
       //get bills only if state empty
-      if (this.props.Bills.length === 0 || this.props.BillPayments.length === 0) {
-        let bills = await fetchFirestoreGetAll('bills', this.props.Property.id, 'billId'),
-          billPayments = await fetchFirestoreGetAll('billPayments', this.props.Property.id)
+      if (
+        this.props.Bills.length === 0 ||
+        this.props.BillPayments.length === 0
+      ) {
+        let bills = await fetchFirestoreGetAll(
+            'bills',
+            this.props.Property.id,
+            'billId'
+          ),
+          billPayments = await fetchFirestoreGetAll(
+            'billPayments',
+            this.props.Property.id
+          )
         this.props.setBills(bills)
         this.props.setBillPayments(billPayments)
         this.props.ToggleBillsLoading(false)
       }
 
       //get incomes only if state empty
-      if (this.props.Income.length === 0 || this.props.IncomePayments.length === 0) {
-        let incomes = await fetchFirestoreGetAll('incomes', this.props.Property.id, 'incomeId'),
-          incomePayments = await fetchFirestoreGetAll('incomePayments', this.props.Property.id, 'incomePaymentId')
+      if (
+        this.props.Income.length === 0 ||
+        this.props.IncomePayments.length === 0
+      ) {
+        let incomes = await fetchFirestoreGetAll(
+            'incomes',
+            this.props.Property.id,
+            'incomeId'
+          ),
+          incomePayments = await fetchFirestoreGetAll(
+            'incomePayments',
+            this.props.Property.id,
+            'incomePaymentId'
+          )
         this.props.setIncomes(incomes)
         this.props.setIncomePayments(incomePayments)
         this.props.ToggleIncomeLoading(false)
       }
 
       //get expenses only if state empty
-      if (this.props.Expenses.length === 0 || this.props.ExpensePayments.length === 0) {
-        let expenses = await fetchFirestoreGetAll('expenses', this.props.Property.id, 'expenseId'),
-          expensePayments = await fetchFirestoreGetAll('expensePayments', this.props.Property.id, 'expensePaymentId')
+      if (
+        this.props.Expenses.length === 0 ||
+        this.props.ExpensePayments.length === 0
+      ) {
+        let expenses = await fetchFirestoreGetAll(
+            'expenses',
+            this.props.Property.id,
+            'expenseId'
+          ),
+          expensePayments = await fetchFirestoreGetAll(
+            'expensePayments',
+            this.props.Property.id,
+            'expensePaymentId'
+          )
         this.props.setExpenses(expenses)
         this.props.setExpensePayments(expensePayments)
         this.props.ToggleExpensesLoading(false)
@@ -142,7 +174,7 @@ class Report extends React.Component {
 
     //Template
     return (
-      <Wrapper>
+      <Wrapper className="react-transition fade-in">
         <TimepickerCon>
           <TimePicker source="report" />
         </TimepickerCon>
@@ -225,7 +257,8 @@ font-size: 16px;
  }
  `
 const Par = styled.p`
-  border-bottom: ${(props) => (props.show === true ? '3px var(--colorMain) solid' : 'none')};
+  border-bottom: ${(props) =>
+    props.show === true ? '3px var(--colorMain) solid' : 'none'};
 `
 const Content = styled.div`
   height: auto;
@@ -238,4 +271,9 @@ const Content = styled.div`
   max-width: 1300px;
 `
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Report))
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Report)
+)

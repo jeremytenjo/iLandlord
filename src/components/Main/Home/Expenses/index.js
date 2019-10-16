@@ -109,8 +109,16 @@ class Expenses extends React.Component {
         this.props.setProperty(propertyData)
       }
 
-      Expenses = await fetchFirestoreGetAll('expenses', urlProperty, 'expenseId')
-      ExpensePayments = await fetchFirestoreGetAll('expensePayments', urlProperty, 'expensePaymentId')
+      Expenses = await fetchFirestoreGetAll(
+        'expenses',
+        urlProperty,
+        'expenseId'
+      )
+      ExpensePayments = await fetchFirestoreGetAll(
+        'expensePayments',
+        urlProperty,
+        'expensePaymentId'
+      )
 
       // console.log(ExpensePayments);
       // console.log(Expenses);
@@ -130,12 +138,16 @@ class Expenses extends React.Component {
     return (
       <Wrapper>
         <NavBar />
-        <Content>
+        <Content className="react-transition fade-in">
           <Switch>
             <Route exact={true} path="/" component={List} />
             <Route exact={true} path="/:id/" component={List} />
             <Route exact={true} path="/:id/expenses" component={List} />
-            <Route exact={true} path="/:id/expenses/report" component={Report} />
+            <Route
+              exact={true}
+              path="/:id/expenses/report"
+              component={Report}
+            />
           </Switch>
         </Content>
       </Wrapper>
