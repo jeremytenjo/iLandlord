@@ -67,7 +67,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build && cp build/index.html build/404.html",
     "test": "react-scripts test --env=jsdom",
-    "deploy": "yarn build && firebase deploy",
+    "deploy": "yarn build && firebase deploy && gpush",
     "eject": "react-scripts eject"
   }
 }
